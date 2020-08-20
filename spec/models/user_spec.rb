@@ -101,25 +101,14 @@ describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
-  end
+ end
 
   describe 'ユーザー新規登録ができるとき' do
+    before do
+      @user = FactoryBot.build(:user)
+    end
     it "nicknameとfirst_nameとfamily_nameとfirst_name_kanaとfamily_name_kanaとemailとpasswordとpassword_confirmationとbirth_dayが存在すると登録できる" do
-      expect(@user).to be_valid
-    end
-    it "passwordが6文字以上の英数混合であれば登録できる" do
-      @user.password = "000ppp"
-      @user.password_confirmation = "000ppp"
-      expect(@user).to be_valid
-    end
-    it "お名前は全角（漢字、ひらがな、カタカナ）で入力すると登録できる" do
-      @user.first_name = "佳かカ"
-      @user.family_name = "佳かカ"
-      expect(@user).to be_valid
-    end
-    it "お名前カナは全角（カナ）で入力すると登録できる" do
-      @user.first_name_kana = "カタカナ"
-      @user.family_name_kana = "カタカナ"
+      @user.valid?
       expect(@user).to be_valid
     end
  end
