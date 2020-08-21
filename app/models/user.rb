@@ -6,16 +6,19 @@ class User < ApplicationRecord
   has_many :items
   
   with_options presence: true do
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
+    VALID_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/
+    VALID_KANA_REGEX = /\A[ァ-ヶー－]+\z/
     validates :nickname
-    validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "正しい名前を入力してください"}
-    validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: "正しい名前を入力してください"}
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "カタカナで入力してください"}
-    validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/, message: "カタカナで入力してください"}
-    validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
+    validates :first_name, format: { with: VALID_NAME_REGEX, message: "正しい名前を入力してください"}
+    validates :family_name, format: { with: VALID_NAME_REGEX, message: "正しい名前を入力してください"}
+    validates :first_name_kana, format: { with: VALID_KANA_REGEX, message: "カタカナで入力してください"}
+    validates :family_name_kana, format: { with: VALID_KANA_REGEX, message: "カタカナで入力してください"}
+    validates :email, format: { with: VALID_EMAIL_REGEX}
     validates :email, uniqueness: true
-    validates :password, format: { with:/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: "半角英数混合で入力してください"}
+    validates :password, format: { with: VALID_PASSWORD_REGEX, message: "半角英数混合で入力してください"}
     validates :password,confirmation: true
-    validates :password,length: { minimum: 6 } 
     validates :password_confirmation
     validates :birth_day
   end
