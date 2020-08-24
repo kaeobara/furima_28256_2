@@ -4,11 +4,15 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :category
   belongs_to_active_hash :item_condition
+  belongs_to_active_hash :postage_payer
+  belongs_to_active_hash :shipping_day
 
   with_options presence: true do
     validates :prefecture_id
     validates :category_id
     validates :item_condition_id
+    validates :postage_payer_id
+    validates :shipping_day_id
   end
 end
   
