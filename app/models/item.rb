@@ -3,10 +3,12 @@ class Item < ApplicationRecord
   belongs_to :user
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :category
+  belongs_to_active_hash :item_condition
 
   with_options presence: true do
     validates :prefecture_id
     validates :category_id
+    validates :item_condition_id
   end
 end
   
