@@ -6,6 +6,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :item_condition
   belongs_to_active_hash :postage_payer
   belongs_to_active_hash :shipping_day
+  has_one_attached :image
+
 
   with_options presence: true do
     validates :prefecture_id
