@@ -10,11 +10,15 @@ class Item < ApplicationRecord
 
 
   with_options presence: true do
+    validates :image
     validates :prefecture_id
     validates :category_id
     validates :item_condition_id
     validates :postage_payer_id
     validates :shipping_day_id
+    validates :name
+    validates :introduction
+    validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }
   end
 end
   
