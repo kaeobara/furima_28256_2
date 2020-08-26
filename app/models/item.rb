@@ -16,13 +16,13 @@ class Item < ApplicationRecord
     validates :item_condition_id
     validates :postage_payer_id
     validates :shipping_day_id
-    validates :name
-    validates :introduction
+    validates :name, length: { maximum: 40 }
+    validates :introduction, length: { maximum: 1000 }
     validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }
   end
 end
   
-# private
+private
 #   def product_params
 #     params.require(:product)
 #       .permit(:name, :description, :price, :condition, :brand, :send_price,
