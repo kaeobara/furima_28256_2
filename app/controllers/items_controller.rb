@@ -24,9 +24,16 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
   end
 
-  def updata
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
  
 
@@ -43,6 +50,11 @@ class ItemsController < ApplicationController
       redirect_to action: :index
     end
   end
+
+#   def set_item
+#     @item = Item.find(params[:id])
+#   end
+# end
 
   # def set_prefecture
   #   @prefecture = Prefecture.find(@item.prefecture_id)
