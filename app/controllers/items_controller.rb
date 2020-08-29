@@ -1,6 +1,5 @@
-class ItemsController < ApplicationController
-  
-
+class ItemsController < ApplicationController  
+  before_action :find_params, only: [:show, :edit, :update]
 
   def index
     @items = Item.all.order("created_at DESC")
