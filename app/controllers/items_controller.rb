@@ -1,6 +1,6 @@
-class ItemsController < ApplicationController
+class ItemsController < ApplicationController  
+  before_action :find_params, only: [:show, :edit, :update]
   
-
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -20,13 +20,17 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
   end
 
-  def updata
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
  
 
@@ -42,11 +46,12 @@ class ItemsController < ApplicationController
     if item.user_id != current_user.id
       redirect_to action: :index
     end
+
+    def find_params
+      @item = Item.find(params[:id])
+    end
   end
 
-  # def set_prefecture
-  #   @prefecture = Prefecture.find(@item.prefecture_id)
-  # end
 
 
 
