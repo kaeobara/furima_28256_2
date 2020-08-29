@@ -1,6 +1,12 @@
 class ItemsController < ApplicationController  
   before_action :find_params, only: [:show, :edit, :update]
 
+  private
+    def find_params
+      @item = Item.find(params[:id])
+    end
+  end
+
   def index
     @items = Item.all.order("created_at DESC")
   end
