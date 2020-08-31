@@ -17,7 +17,7 @@
 
 
 - has_many :items, dependent::destroy #一緒に消える
-- has_many :transaction
+- has_many :purchase
 
 ##  Itemsテーブル
 
@@ -37,9 +37,9 @@
 ### Association
 
 - belongs_to :user
-- has_one :transaction
+- has_one :purchase
 
-##  Transactionsテーブル
+##  Purchaseテーブル
 
 | Column          | Type       | Options              |
 | --------------  | ---------- | -------------------- |
@@ -68,4 +68,4 @@
 
 ### Association
 
-- belongs_to :transaction
+- belongs_to :purchase
