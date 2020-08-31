@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController  
-  before_action :find_params, only: [:show, :edit, :update]
+  before_action :find_item_params, only: [:show, :edit, :update, :destroy]
   
 
   def index
@@ -32,6 +32,13 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    end
+  end
+
  
 
 
@@ -46,13 +53,10 @@ class ItemsController < ApplicationController
     if item.user_id != current_user.id
       redirect_to action: :index
     end
-
-    def find_params
-      @item = Item.find(params[:id])
-    end
   end
 
-
-
-
+    def find_item_params
+      @item = Item.find(params[:id])
+    end
+    
 end
