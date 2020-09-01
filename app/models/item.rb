@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :postage_payer
   belongs_to_active_hash :shipping_day
   has_one_attached :image
-  has_one :transaction
+  has_one :purchase
 
 
   with_options presence: true do
@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   end
 end
   
-private
+# private
 #   def product_params
 #     params.require(:product)
 #       .permit(:name, :description, :price, :condition, :brand, :send_price,
