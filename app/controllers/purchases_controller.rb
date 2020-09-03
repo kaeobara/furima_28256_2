@@ -3,12 +3,10 @@ class PurchasesController < ApplicationController
   
 
   def index
-    @item = Item.find(params[:item_id])
     @purchase = Purchase.new
   end
 
   def new
-    @item = Item.find(params[:item_id])
     @purchase = PurchaseAddress.new
     if current_user.id == @item.user_id
       return redirect_to root_path
@@ -19,7 +17,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase = PurchaseAddress.new(purchase_params)
     if @purchase.valid?
       pay_item
