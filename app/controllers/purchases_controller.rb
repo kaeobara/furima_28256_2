@@ -10,6 +10,12 @@ class PurchasesController < ApplicationController
   def new
     @item = Item.find(params[:item_id])
     @purchase = PurchaseAddress.new
+    if current_user.id == @item.user_id
+      return redirect_to root_path
+    end
+    if @item.purchase.present?
+      return redirect_to root_path
+    end
   end
 
   def create
