@@ -7,7 +7,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :postage_payer
   belongs_to_active_hash :shipping_day
   has_one_attached :image
-  has_one :purchase
+  # has_one :purchase, foreign_key: :item_id, dependent: :destroy
+  has_one :purchase, dependent: :destroy
 
 
   with_options presence: true do
